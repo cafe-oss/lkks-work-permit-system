@@ -1,0 +1,80 @@
+# Composer dependencies
+vendor/
+composer.lock
+
+# WordPress core files (if accidentally included)
+wp-config.php
+wp-config-sample.php
+.htaccess
+
+# WordPress uploads and cache
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Node.js dependencies (if you use any build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.phpstorm.meta.php
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment and configuration files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Log files
+*.log
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Generated PDFs (optional - uncomment if you don't want to track generated PDFs)
+# *.pdf
+# generated-pdfs/
+
+# Plugin specific temporary files
+temp/
+cache/
+
+# Backup files
+*.bak
+*.backup
+
+# Database dumps
+*.sql
+*.sqlite
+
+# Minified files (if you have build process)
+*.min.js
+*.min.css
+
+# Package managers
+composer.phar
+package-lock.json
+
+# WordPress plugin specific
+readme.txt.bak

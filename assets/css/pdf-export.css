@@ -1,0 +1,126 @@
+/**
+ * PDF Export Styles
+ * File: assets/css/pdf-export.css
+ */
+
+ @font-face {
+    font-family: 'WorkSans';
+    /* src: url('../fonts/WorkSans-Regular.ttf') format('truetype'); */
+    src: url('/wp-content/plugins/work-permit-system/assets/fonts/WorkSans-Regular.ttf') format('truetype'),
+         /* Fallback relative paths */
+         url('../fonts/WorkSans-Regular.ttf') format('truetype'),
+         url('./assets/fonts/WorkSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.wps-pdf-export-wrapper {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #0073aa;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-btn:hover {
+  background: #005a87;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 115, 170, 0.3);
+}
+
+.wps-export-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.wps-export-btn:disabled:hover {
+  background: #ccc;
+  color: white;
+}
+
+.wps-icon {
+  font-size: 16px;
+  line-height: 1;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-btn-text {
+  line-height: 1;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-status {
+  margin-top: 15px;
+  min-height: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-status.success {
+  color: #46b450;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-status.processing {
+  color: #0073aa;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.wps-export-status.error {
+  color: #dc3232;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Loading animation */
+.wps-export-btn .dashicons-update {
+  animation: wps-spin 1s linear infinite;
+  font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+@keyframes wps-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .wps-export-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  .wps-pdf-export-wrapper {
+    margin: 15px 0;
+    padding: 15px;
+  }
+}

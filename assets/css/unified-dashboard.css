@@ -1,0 +1,123 @@
+/**
+ * Unified Dashboard CSS
+ * File: assets/css/unified-dashboard.css
+ * 
+ * Combined styles for both approver and reviewer dashboards
+ * Table styles have been moved to unified-table.css
+ */
+
+/* WorkSans Font Declaration */
+@font-face {
+    font-family: 'WorkSans';
+    src: url('/wp-content/plugins/work-permit-system/assets/fonts/WorkSans-Regular.ttf') format('truetype'),
+         url('../fonts/WorkSans-Regular.ttf') format('truetype'),
+         url('./assets/fonts/WorkSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Base Body Styles */
+body.toplevel_page_wps-approver-dashboard,
+body.toplevel_page_wps-reviewer-dashboard {
+    background: rgb(248 249 250) !important;
+    font-size: 16px;
+    font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+#wpcontent {
+    padding: 10px !important;
+}
+
+/* Dashboard Container */
+.approver-dashboard,
+.reviewer-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Search and Filter Section */
+.search-filter-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    margin: 0 1rem;
+    padding: 24px;
+}
+
+.search-filter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #9B1A1A, #28136D);
+}
+
+#search-filter-form {
+    width: 100%;
+}
+
+.search-bar-section {
+    margin-bottom: 24px;
+}
+
+
+button#clear-filters {
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #000;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #9B1A1A;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-filter-section {
+        padding: 16px;
+    }
+
+    .quick-filter-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .quick-filter-item label {
+        white-space: normal;
+    }
+
+
+    .toplevel_page_wps-approver-dashboard textarea,
+    .toplevel_page_wps-approver-dashboard select,
+    .toplevel_page_wps-approver-dashboard input,
+    .toplevel_page_wps-reviewer-dashboard textarea,
+    .toplevel_page_wps-reviewer-dashboard select,
+    .toplevel_page_wps-reviewer-dashboard input {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 782px) {
+    select#approver-status,
+    select#reviewer-status {
+        line-height: 2.71428571;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+}
+
+/* Enhanced focus styles for search section */
+#search-filter-form:focus-within .search-filter-section {
+    box-shadow: 0 8px 25px -5px rgba(155, 26, 26, 0.1), 0 10px 10px -5px rgba(40, 19, 109, 0.05);
+}

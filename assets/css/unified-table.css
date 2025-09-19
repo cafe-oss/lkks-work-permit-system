@@ -1,0 +1,1359 @@
+/**
+ * Unified Table Design CSS
+ * File: assets/css/unified-table.css
+ * 
+ * Shared table styling for both admin dashboard-tab.php and unified-dashboard.php
+ * Includes table design, filter section, and permit cards
+ */
+
+/* ===== FONT DECLARATION ===== */
+@font-face {
+    font-family: 'WorkSans';
+    src: url('/wp-content/plugins/work-permit-system/assets/fonts/WorkSans-Regular.ttf') format('truetype'),
+         url('../fonts/WorkSans-Regular.ttf') format('truetype'),
+         url('./assets/fonts/WorkSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Primary Colors */
+    --wps-primary-red: #9B1A1A;
+    --wps-primary-purple: #28136D;
+    --wps-primary-dark: #005a87;
+    
+    /* Status Colors */
+    --status-pending-bg: #FFE6CC;
+    --status-pending-color: #CC4400;
+    --status-review-bg: #CCE7FF;
+    --status-review-color: #0056B3;
+    --status-approval-bg: #CCE7FF;
+    --status-approval-color: #0056B3;
+    --status-approved-bg: #D4EDDA;
+    --status-approved-color: #155724;
+    --status-cancelled-bg: #F8D7DA;
+    --status-cancelled-color: #721C24;
+    
+    /* Spacing */
+    --wps-spacing-xs: 5px;
+    --wps-spacing-sm: 10px;
+    --wps-spacing-md: 15px;
+    --wps-spacing-lg: 20px;
+    --wps-spacing-xl: 30px;
+    
+    /* Border Radius */
+    --wps-border-radius: 4px;
+    --wps-border-radius-lg: 8px;
+    --wps-border-radius-xl: 12px;
+    
+    /* Shadows */
+    --wps-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --wps-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --wps-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --wps-transition: all 0.2s ease;
+    --wps-transition-fast: all 0.15s ease;
+}
+
+/* ===== BASE STYLES ===== */
+.wrap {
+    font-family: 'WorkSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* ===== DASHBOARD HEADER SECTION ===== */
+.dashboard__header {
+    background: linear-gradient(to right, #9B1A1A 0%, #9B2C2C 50%, #9B3737 75%, #9B4242 88%, #9B4F4F 100%);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.dashboard__stats {
+    display: flex;
+    gap: 24px;
+}
+
+.dashboard__intro h2 {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.dashboard__welcome h1 {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0 !important;
+}
+
+.stat-card {
+    display: flex;
+    gap: 3px;
+    color: #fff;
+}
+
+/* Responsive Header */
+@media(max-width: 1250px) {
+    .dashboard__header {
+        flex-direction: column;
+        align-items: start !important;
+    }
+
+    .dashboard__stats {
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+
+    .stat-card {
+        padding: .5rem;
+    }
+
+    .dashboard__welcome h1 {
+        line-height: 1;
+    }
+}
+
+/* ===== TABLE AND PERMIT CARDS ===== */
+.dashboard__data-grid {
+    margin-top: 32px;
+    background: white;
+    border-radius: var(--wps-border-radius-xl);
+    box-shadow: var(--wps-shadow-sm);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    position: relative;
+    margin: 0 1rem;
+}
+
+.dashboard__data-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--wps-primary-red), var(--wps-primary-purple));
+}
+
+/* Data Grid Rows */
+.data-grid__row {
+    display: flex;
+    width: 100%;
+}
+
+/* table header */
+.data-grid__row--header {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.data-grid__row--header .data-grid__cell {
+    /* padding: 12px 24px;
+    text-align: left;
+    flex: 1; */
+}
+
+.data-grid__row--header .data-grid__cell h3 {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.data-grid__row--data {
+    background: white;
+}
+
+.permits-container {
+    width: 100%;
+}
+
+/* Table Wrapper */
+.permits-table-wrapper {
+    overflow-x: auto;
+}
+
+.permits-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.permits-table thead th {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'WorkSans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.permits-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: var(--wps-transition-fast);
+}
+
+.permits-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.permits-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.permits-table tbody td {
+    padding: 16px;
+    vertical-align: top;
+}
+
+/* Permit Card Layout (Used in both table and card views) */
+.permit-card {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #e5e7eb;
+    transition: var(--wps-transition-fast);
+    position: relative;
+    padding: 0;
+}
+
+.permit-card:hover {
+    background-color: #f9fafb;
+}
+
+.permit-card:last-child {
+    border-bottom: none;
+}
+
+.permit-card.no-border-bottom {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.permit-card:last-child.no-border-bottom {
+    border-bottom: none;
+}
+
+.permit-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(to bottom, var(--wps-primary-red), var(--wps-primary-purple));
+    transition: width 0.3s ease;
+}
+
+.permit-card:hover::before {
+    width: 3px;
+}
+
+/* Data Grid Cells */
+.data-grid__cell {
+    display: flex;
+    align-items: center;
+    color: #6b7280;
+}
+
+@media(min-width: 1251px) {
+    .data-grid__cell {
+        margin: 16px 24px;
+        overflow:hidden;
+    }
+
+    .toplevel_page_work-permits .data-grid__cell{
+        width: 14%;
+    }
+
+    .toplevel_page_wps-reviewer-dashboard .data-grid__cell{
+        width: 20%;
+    }
+
+    .toplevel_page_wps-approver-dashboard .data-grid__cell{
+        width: 16.66%;
+    }
+}
+
+.data-grid__cell *{
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+.data-grid__cell span {
+    color: #111827;
+}
+
+.data-grid__cell:first-child span {
+    font-weight: 500;
+    color: #111827;
+}
+
+.data-grid__cell:not(:first-child) span {
+    color: #6b7280;
+}
+
+/* Applicant Information */
+.applicant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.applicant-permit_id {
+    font-family: 'WorkSans', sans-serif;
+    font-weight: 700 !important;
+    font-size: 1.35rem;
+    color: #111827;
+}
+
+.applicant-tenant {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.applicant-email {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.status-pending-review {
+    background: var(--status-pending-bg);
+    color: var(--status-pending-color) !important;
+}
+
+.status-under-review {
+    background: var(--status-review-bg);
+    color: var(--status-review-color) !important;
+}
+
+.status-pending-approval {
+    background: var(--status-approval-bg);
+    color: var(--status-approval-color) !important;
+}
+
+.status-approved {
+    background: var(--status-approved-bg);
+    color: var(--status-approved-color) !important;
+}
+
+.status-cancelled {
+    background: var(--status-cancelled-bg);
+    color: var(--status-cancelled-color) !important;
+}
+
+#details-current-status,
+#modal-current-status {
+    margin-left: .5rem;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.permit-actions {
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.button.button-small,
+.button.button-primary,
+.button.view-permit,
+.button.view-details-btn,
+.review-permit-btn,
+.approve-permit-btn {
+    padding: 6px 12px !important;
+    line-height: 1.5 !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+    font-size: 12px;
+    font-weight: 500;
+    transition: var(--wps-transition);
+    cursor: pointer;
+}
+
+.review-permit-btn,
+.approve-permit-btn {
+    background: var(--wps-primary-purple) !important;
+    color: #fff !important;
+    border: 1px solid var(--wps-primary-purple) !important;
+}
+
+.review-permit-btn:focus,
+.approve-permit-btn:focus,
+.review-permit-btn:hover,
+.approve-permit-btn:hover {
+    background: #201058 !important;
+    border-color: #201058 !important;
+    box-shadow: 0 0 0 2px rgba(40, 19, 109, 0.2);
+}
+
+.view-details-btn,
+.button.view-permit {
+    background: #fff !important;
+    color: var(--wps-primary-purple) !important;
+    border: 1px solid var(--wps-primary-purple) !important;
+}
+
+.view-details-btn:hover,
+.button.view-permit:hover {
+    background: #f8f9fa !important;
+    color: #201058 !important;
+    border-color: #201058 !important;
+}
+
+/* ===== URGENT INDICATORS ===== */
+.permit-card.urgent {
+    background-color: #fff3cd !important;
+    border-left: 4px solid #ff6b35 !important;
+}
+
+.urgent-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    z-index: 1;
+}
+
+/* ===== NO PERMITS MESSAGE ===== */
+.no-permits {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.no-permits-icon .dashicons {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.no-permits h3 {
+    font-family: 'WorkSans', sans-serif;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.no-permits p {
+    margin-bottom: 20px;
+    color: #6b7280;
+}
+
+
+
+/* ===== MODAL STYLES ===== */
+.wps-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wps-modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.wps-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+.wps-modal-title-status {
+    display: flex;
+    align-items: center;
+}
+
+#preview-permit,
+.button.wps-modal-close {
+    display: flex;
+    gap: 5px;
+    background: #fff !important;
+    color: #3c434a !important;
+    border: 1px solid rgb(209 213 219) !important;
+    margin-left: 8px;
+    padding: 6px 12px !important;
+    border-radius: 0;
+    text-decoration: none;
+    align-items: center !important;
+    justify-content: center;
+    width: auto;
+    height: 100% !important;
+    line-height: 1.5 !important;
+    cursor: pointer;
+}
+
+.wps-modal-close {
+    display: flex;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+#preview-permit:hover,
+.wps-modal-close:hover {
+    background: #eee;
+}
+
+.wps-modal-body {
+    padding: 24px;
+}
+
+.wps-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 0 0 8px 8px;
+}
+
+.modal-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Modal Info Cards */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.permit-info-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: var(--wps-primary-red);
+    cursor: pointer;
+}
+
+.permit-info-card-header h5 {
+    font-weight: 500;
+    color: white;
+    margin: 0;
+    font-size: 16px;
+}
+
+.permit-info-card-header .chevron {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.permit-info-card-header .chevron svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.permit-info-card.collapsed .chevron svg {
+    transform: rotate(180deg);
+}
+
+.permit-info-card-content {
+    padding: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--wps-shadow-sm);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.permit-info-card.collapsed .permit-info-card-content {
+    max-height: 0;
+    padding: 0 16px;
+    opacity: 0;
+    display: none;
+}
+
+.permit-info-card:not(.collapsed) .permit-info-card-content {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.permit-info-card-header:hover {
+    background-color: #8A1515;
+}
+
+.permit-info-card-header:focus-within {
+    outline: 2px solid rgba(155, 26, 26, 0.3);
+    outline-offset: 2px;
+}
+
+.chevron:focus {
+    outline: none;
+}
+
+.card-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.card-info-grid .info-item,
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-info-grid .info-item label,
+.info-item label {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.card-info-grid .info-item span,
+.info-item span {
+    font-weight: 500 !important;
+    color: #111827;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.work-description {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.work-description label {
+    font-size: 16px;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.work-description div {
+    font-weight: 500;
+    color: #111827;
+    font-size: 16px;
+    line-height: 1.5;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    min-height: 40px;
+}
+
+.personnel-list {
+    list-style: none; 
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.personnel-list li {
+    font-weight: 500;
+    color: #111827;
+    font-size: 16px;
+    margin-bottom: 4px;
+    display: flex;
+    gap: 8px;
+}
+
+.others-specification-item {
+    display: none;
+}
+
+.others-specification-item.show {
+    display: flex;
+}
+
+/* Form Controls */
+.decision-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-field {
+    margin-bottom: 20px;
+}
+
+.decision-field label {
+    min-width: max-content;
+}
+
+.decision-field label,
+.comment-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.decision-field select,
+.comment-field textarea {
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 0;
+    color: #3c434a;
+}
+
+.comment-field textarea:focus {
+    border-color: var(--wps-primary-purple);
+}
+
+.decision-field select {
+    padding-right: 2rem;
+    line-height: 1.5 !important;
+}
+
+.decision-field select:focus {
+    border-color: var(--wps-primary-purple);
+}
+
+.decision-field select option,
+.decision-field select:focus,
+.decision-field select:focus option {
+    color: #111827 !important;
+}
+
+.comment-field.required textarea {
+    border-color: #f56e28;
+}
+
+.help-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+#submit-approval,
+#submit-review {
+    background: #fff !important;
+    color: var(--wps-primary-purple) !important;
+    border: 1px solid var(--wps-primary-purple) !important;
+    padding: 6px 12px !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+    line-height: 1.5 !important;
+}
+
+#submit-approval:disabled,
+#submit-review:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.permit-info-section,
+.current-status-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.permit-info-section:last-child,
+.current-status-section:last-child,
+.decision-section:last-child,
+#view-details-modal .permit-info-section {
+    border-bottom: none;
+}
+
+#comment-help {
+    margin-bottom: 1.33em;
+}
+
+.decision-section .permit-section_title {
+    margin-bottom: 0;
+}
+
+.status-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#comment-required-indicator {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+/* Attachments */
+.view-attachments-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    background: #fff !important;
+    color: #3c434a !important;
+    border: 1px solid rgb(209 213 219) !important;
+    margin-left: 8px;
+    padding: 6px 12px !important;
+    border-radius: 0 !important;
+    text-decoration: none;
+    align-items: center;
+}
+
+.view-attachments-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+}
+
+.attachments-modal-content {
+    width: 90%;
+    max-width: 900px;
+}
+
+.attachments-modal-header {
+    margin-bottom: 20px;
+}
+
+.attachments-modal-header h3 {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    color: #2c5aa0;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.attachments-modal-header p {
+    margin: 5px 0;
+    color: #6c757d;
+}
+
+.attachment-group {
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.attachment-group h4 {
+    background: #f8f9fa;
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.attachment-items {
+    padding: 0;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.2s;
+}
+
+.attachment-item:last-child {
+    border-bottom: none;
+}
+
+.attachment-item:hover {
+    background-color: #f8f9fa;
+}
+
+.attachment-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+}
+
+.attachment-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.attachment-name {
+    font-weight: 600;
+    color: #2c5aa0;
+    margin-bottom: 5px;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.attachment-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.attachment-meta span {
+    font-size: 12px;
+    color: #6c757d;
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.attachment-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 2px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.4;
+}
+
+.btn-sm {
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+.btn-primary {
+    background-color: #007cba;
+    color: white;
+    border-color: #007cba;
+}
+
+.btn-primary:hover {
+    background-color: #005a87;
+    border-color: #005a87;
+    color: white;
+}
+
+.no-attachments {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.loading-spinner:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #e9ecef;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== PAGINATION ===== */
+
+.tablenav-pages {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prev-page,
+.next-page {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: var(--wps-primary-purple);
+    transition: var(--wps-transition);
+}
+
+.prev-page:hover,
+.next-page:hover {
+    background-color: #f0f0f1;
+    border-color: var(--wps-primary-purple);
+}
+
+.displaying-num {
+    font-size: 14px;
+    color: #6b7280;
+    margin-right: 10px;
+}
+
+/* Data Grid Pagination */
+.data-grid__row.data-grid__row--pagination {
+    padding: 24px;
+    display: flex;
+    width: auto;
+    justify-content: center;
+}
+
+.pagination-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+a.page-numbers {
+    color: #6b7280 !important;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span.page-numbers {
+    display: flex;
+    height: 10px;
+    width: 10px;
+    padding: 10px;
+    background: #000;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    color: #fff;
+}
+
+/* Typography */
+#details-modal-title,
+#modal-title {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--wps-primary-purple);
+}
+
+.permit-section_title {
+    font-family: 'WorkSans Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 500;
+    color: rgb(31 41 55);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1250px) {
+    .data-grid__row {
+        flex-direction: column;
+    }
+
+    .data-grid__row--header {
+        display: none;
+    }
+
+    .permit-card {
+        flex-direction: column;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 16px;
+        width: auto !important;
+        margin: 1rem;
+    }
+
+    .permit-card .data-grid__cell {
+        padding: 8px 0;
+        border-bottom: 1px solid #f3f4f6;
+        flex-direction: column;
+        align-items: flex-start;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .permit-card .data-grid__cell:last-child {
+        border-bottom: none;
+    }
+
+    .permit-card .data-grid__cell:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #374151;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .permits-table-wrapper {
+        display: none;
+    }
+
+    .permits-container {
+        display: block;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .search-type-select {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .search-filter-section {
+        padding: 16px;
+    }
+
+    .search-button {
+        width: auto;
+    }
+
+    .wps-modal-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .attachment-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .attachment-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .attachment-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .permit-info-card-header {
+        padding: 10px;
+    }
+
+    .permit-info-card-content {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    .applicant-permit_id {
+        font-size: 1.1rem !important;
+    }
+
+    .permit-card {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 12px;
+    }
+
+    .data-grid__cell {
+        padding: 12px 0;
+    }
+}
+
+@media(max-width: 578px) {
+    .modal-footer-left {
+        align-items: unset;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 782px) {
+    select#approver-status,
+    select#reviewer-status {
+        line-height: 2.71428571;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+button:focus,
+input:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--wps-primary-purple) !important;
+}
+
+/* Enhanced focus styles for search section */
+#search-filter-form:focus-within .search-filter-section {
+    box-shadow: 0 8px 25px -5px rgba(155, 26, 26, 0.1), 0 10px 10px -5px rgba(40, 19, 109, 0.05);
+}
+
+/* ===== LOADING STATES ===== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Attachment Viewer CSS - Add to unified-table.css */
+
+.attachment-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.view-pdf-btn,
+.view-as-pdf-btn,
+.view-image-btn {
+    background-color: var(--wps-primary-purple);;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.view-as-pdf-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.pdf-conversion-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.attachment-item {
+    position: relative;
+}
+
+/* Loading spinner for conversion */
+.pdf-conversion-loading::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
